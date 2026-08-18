@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kế Hoạch Xây Dựng Đội Ngũ Công Nghệ Nòng Cốt | 90 Ngày</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --primary-light: #3b82f6;
+    --accent: #f59e0b;
+    --accent-dark: #d97706;
+    --success: #10b981;
+    --danger: #ef4444;
+    --info: #06b6d4;
+    --purple: #8b5cf6;
+    --dark: #0f172a;
+    --gray: #64748b;
+    --light: #f1f5f9;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%);
+    color: var(--dark);
+    line-height: 1.6;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(30, 58, 138, 0.15);
+    overflow: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 50px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(245,158,11,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .header .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    position: relative;
+    z-index: 1;
+  }
+  .badge-top {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--dark);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* SUMMARY CARDS */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 30px 40px;
+    background: var(--light);
+    border-bottom: 3px solid var(--accent);
+  }
+  .summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-left: 5px solid var(--primary-light);
+    transition: transform 0.3s;
+  }
+  .summary-card:hover { transform: translateY(-5px); }
+  .summary-card .number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .summary-card .label {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 40px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title .icon {
+    width: 45px; height: 45px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+
+  /* OBJECTIVES */
+  .objective-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+  }
+  .objective-item {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    padding: 18px 20px;
+    border-radius: 10px;
+    border-left: 4px solid var(--success);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .objective-item .check {
+    color: var(--success);
+    font-size: 1.3rem;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  /* POSITIONS GRID */
+  .positions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  .position-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    border-top: 5px solid var(--primary-light);
+    transition: all 0.3s;
+    position: relative;
+  }
+  .position-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(30, 58, 138, 0.15);
+  }
+  .position-card.priority-very-high { border-top-color: var(--danger); }
+  .position-card.priority-high { border-top-color: var(--accent); }
+  .position-card .pos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  .position-card h3 {
+    color: var(--primary);
+    font-size: 1.2rem;
+  }
+  .priority-tag {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .priority-very-high .priority-tag { background: #fee2e2; color: var(--danger); }
+  .priority-high .priority-tag { background: #fef3c7; color: var(--accent-dark); }
+
+  .pos-detail {
+    font-size: 0.9rem;
+    margin: 8px 0;
+    color: var(--gray);
+  }
+  .pos-detail strong { color: var(--dark); }
+  .salary-range {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-weight: 600;
+    color: var(--accent-dark);
+    font-size: 0.9rem;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding: 20px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--primary-light), var(--accent));
+  }
+  .timeline-item {
+    position: relative;
+    padding-left: 80px;
+    margin-bottom: 30px;
+  }
+  .timeline-dot {
+    position: absolute;
+    left: 18px;
+    top: 5px;
+    width: 28px; height: 28px;
+    background: white;
+    border: 4px solid var(--primary-light);
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .timeline-item:nth-child(even) .timeline-dot { border-color: var(--accent); }
+  .timeline-content {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--primary-light);
+  }
+  .timeline-item:nth-child(even) .timeline-content { border-left-color: var(--accent); }
+  .timeline-week {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 4px 14px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .timeline-item:nth-child(even) .timeline-week { background: var(--accent-dark); }
+  .timeline-content h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+  }
+
+  /* PRACTICAL DETAILS */
+  .practical-box {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-left: 5px solid var(--accent);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 15px;
+  }
+  .practical-box h4 {
+    color: var(--accent-dark);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .practical-box ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .practical-box li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+    font-size: 0.92rem;
+    color: var(--dark);
+  }
+  .practical-box li::before {
+    content: '▸';
+    position: absolute;
+    left: 5px;
+    color: var(--accent-dark);
+    font-weight: bold;
+  }
+
+  /* TOOLS LIST */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+  }
+  .tool-chip {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 2px solid #e2e8f0;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .tool-chip:hover {
+    border-color: var(--primary-light);
+    background: #eff6ff;
+  }
+
+  /* TABLE */
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+  .matrix-table th {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  .matrix-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+  }
+  .matrix-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    color: var(--primary);
+    background: #f8fafc;
+  }
+  .matrix-table tr:hover td { background: #f1f5f9; }
+  .score-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .score-5 { background: #dcfce7; color: #166534; }
+  .score-4 { background: #dbeafe; color: #1e40af; }
+  .score-3 { background: #fef3c7; color: #92400e; }
+  .score-2 { background: #fee2e2; color: #991b1b; }
+  .score-1 { background: #fecaca; color: #7f1d1d; }
+
+  /* BUDGET */
+  .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+  .budget-table th {
+    background: var(--success);
+    color: white;
+    padding: 14px;
+    text-align: left;
+  }
+  .budget-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .budget-table tr:last-child td { border-bottom: none; }
+  .budget-table .total-row {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    font-weight: 700;
+    color: #065f46;
+    font-size: 1.05rem;
+  }
+
+  /* SUCCESS CRITERIA */
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+  }
+  .criteria-card {
+    padding: 20px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .criteria-card h4 {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid;
+    font-size: 1.05rem;
+  }
+  .criteria-card.hr h4 { color: var(--purple); border-color: var(--purple); }
+  .criteria-card.org h4 { color: var(--info); border-color: var(--info); }
+  .criteria-card.tech h4 { color: var(--primary-light); border-color: var(--primary-light); }
+  .criteria-card.prod h4 { color: var(--success); border-color: var(--success); }
+  .criteria-card ul { list-style: none; padding: 0; }
+  .criteria-card li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+    font-size: 0.9rem;
+  }
+  .criteria-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+  .criteria-card.hr li::before { color: var(--purple); }
+  .criteria-card.org li::before { color: var(--info); }
+  .criteria-card.tech li::before { color: var(--primary-light); }
+  .criteria-card.prod li::before { color: var(--success); }
+
+  /* PROPOSAL BOX */
+  .proposal-box {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 35px;
+    border-radius: 15px;
+    margin: 30px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .proposal-box::before {
+    content: '💡';
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    font-size: 10rem;
+    opacity: 0.1;
+  }
+  .proposal-box h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    position: relative;
+  }
+  .proposal-box p {
+    font-size: 1rem;
+    line-height: 1.8;
+    position: relative;
+  }
+  .highlight-text {
+    background: var(--accent);
+    color: var(--dark);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  /* RISKS */
+  .risk-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+  }
+  .risk-item {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    border-left: 4px solid var(--danger);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  }
+  .risk-item h4 {
+    color: var(--danger);
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+  .risk-item p {
+    font-size: 0.88rem;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+  .risk-item .mitigation {
+    background: #f0fdf4;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #166534;
+    border-left: 3px solid var(--success);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--dark);
+    color: #cbd5e1;
+    padding: 25px 40px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  .footer strong { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .header { padding: 30px 20px; }
+    .header h1 { font-size: 1.8rem; }
+    .section { padding: 25px 20px; }
+    .timeline-item { padding-left: 60px; }
+    .timeline::before { left: 20px; }
+    .timeline-dot { left: 8px; }
+    .proposal-box { margin: 20px; padding: 25px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <span class="badge-top">🚀 ALPHAWAY TECHNOLOGY TEAM</span>
+    <h1>Kế Hoạch Xây Dựng Đội Ngũ Công Nghệ Nòng Cốt</h1>
+    <p class="subtitle">Giai đoạn 0-3 tháng đầu tiên | Mục tiêu: Sẵn sàng phát triển MVP từ tháng thứ 3</p>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="number">90</div>
+      <div class="label">Ngày triển khai</div>
+    </div>
+    <div class="summary-card">
+      <div class="number">7</div>
+      <div class="label">Vị trí nòng cốt</div>
+    </div>
+    <div class="summary-card">
+      <div class="number">5</div>
+      <div class="label">Giai đoạn thực hiện</div>
+    </div>
+    <div class="summary-card">
+      <div class="number">12</div>
+      <div class="label">Tháng roadmap sản phẩm</div>
+    </div>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <div class="section">
+    <h2 class="section-title"><span class="icon">🎯</span> Mục Tiêu Giai Đoạn 0-3 Tháng</h2>
+    <div class="objective-list">
+      <div class="objective-item">
+        <span class="check">✅</span>
+        <div><strong>Tuyển đủ 7 vị trí chiến lược</strong><br><small>DM, PM, SA, QC Lead, Senior BE/FE, DevOps Lead</small></div>
+      </div>
+      <div class="objective-item">
+        <span class="check">✅</span>
+        <div><strong>Hoàn thiện mô hình tổ chức</strong><br><small>Cơ cấu, RACI, Career Path cho toàn khối</small></div>
+      </div>
+      <div class="objective-item">
+        <span class="check">✅</span>
+        <div><strong>Khung kiến trúc công nghệ</strong><br><small>Target Architecture, API Standard, Security Blueprint</small></div>
+      </div>
+      <div class="objective-item">
+        <span class="check">✅</span>
+        <div><strong>Quy trình phát triển phần mềm</strong><br><small>Agile, DevSecOps, Coding Standards</small></div>
+      </div>
+      <div class="objective-item">
+        <span class="check">✅</span>
+        <div><strong>Sẵn sàng phát triển MVP</strong><br><small>Backlog, Sprint 0, Environment hoàn chỉnh</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 POSITIONS -->
+  <div class="section">
+    <h2 class="section-title"><span class="icon">👥</span> 7 Vị Trí Nòng Cốt Cần Tuyển (Đợt 1)</h2>
+    <p style="color:var(--gray); margin-bottom:20px;">Mức lương tham khảo theo thị trường Việt Nam 2026 (USD/tháng, gross)</p>
+    <div class="positions-grid">
+
+      <div class="position-card priority-high">
+        <div class="pos-header">
+          <h3>👔 Delivery Manager (DM)</h3>
+          <span class="priority-tag">Độ ưu tiên: TB</span>
+        </div>
+        <p class="pos-detail"><strong>Kinh nghiệm:</strong> 10-15 năm CNTT, 5+ năm quản lý</p>
+        <p class="pos-detail"><strong>Domain:</strong> Banking / Fintech bắt buộc</p>
+        <p class="pos-detail"><strong>KPI 90 ngày:</strong> Technology Strategy, Org Design, Hiring Plan</p>
+        <div class="salary-range">💰 $5,000 - $8,000 + ESOP</div>
+      </div>
+
+      <div class="position-card priority-high">
+        <div class="pos-header">
+          <h3>📋 Project Manager (PM)</h3>
+          <span class="priority-tag">Độ ưu tiên: TB</span>
+        </div>
+        <p class="pos-detail"><strong>Kinh nghiệm:</strong> 5-8 năm PM, ưu tiên Banking/Payment</p>
+        <p class="pos-detail"><strong>Chứng chỉ:</strong> PMP / Scrum Master (ưu tiên)</p>
+        <p class="pos-detail"><strong>KPI 90 ngày:</strong> Product Roadmap, MVP Scope, Backlog</p>
+        <div class="salary-range">💰 $2,500 - $4,000</div>
+      </div>
+
+      <div class="position-card priority-very-high">
+        <div class="pos-header">
+          <h3>🏗️ Solution Architect</h3>
+          <span class="priority-tag">Độ ưu tiên: Rất Cao</span>
+        </div>
+        <p class="pos-detail"><strong>Kinh nghiệm:</strong> 8+ năm dev, 3+ năm SA</p>
+        <p class="pos-detail"><strong>Bắt buộc:</strong> Microservices, Kafka, Kubernetes, ISO 8583</p>
+        <p class="pos-detail"><strong>KPI 90 ngày:</strong> Architecture Blueprint, API Standard</p>
+        <div class="salary-range">💰 $4,000 - $6,500</div>
+      </div>
+
+      <div class="position-card priority-high">
+        <div class="pos-header">
+          <h3>🔍 QC Lead</h3>
+          <span class="priority-tag">Độ ưu tiên: TB</span>
+        </div>
+        <p class="pos-detail"><strong>Kinh nghiệm:</strong> 8+ năm Testing, 3+ năm Lead</p>
+        <p class="pos-detail"><strong>Kỹ năng:</strong> Automation, Agile/Scrum, Team Building</p>
+        <p class="pos-detail"><strong>KPI 90 ngày:</strong> QC Framework, Testing Standards</p>
+        <div class="salary-range">💰 $2,500 - $4,000</div>
+      </div>
+
+      <div class="position-card priority-very-high">
+        <div class="pos-header">
+          <h3>⚙️ Senior Backend Developer</h3>
+          <span class="priority-tag">Độ ưu tiên: Rất Cao</span>
+        </div>
+        <p class="pos-detail"><strong>Stack:</strong> Java Spring Boot HOẶC .NET Core</p>
+        <p class="pos-detail"><strong>Bắt buộc:</strong> OAuth2, JWT, Redis, Kafka, Docker</p>
+        <p class="pos-detail"><strong>Bài test:</strong> 4 giờ (API Design + Code + DB + Security)</p>
+        <div class="salary-range">💰 $2,800 - $4,500</div>
+      </div>
+
+      <div class="position-card priority-very-high">
+        <div class="pos-header">
+          <h3>🎨 Senior Frontend Developer</h3>
+          <span class="priority-tag">Độ ưu tiên: Rất Cao</span>
+        </div>
+        <p class="pos-detail"><strong>Stack:</strong> React/NextJS HOẶC Angular 14+</p>
+        <p class="pos-detail"><strong>Bắt buộc:</strong> TypeScript, WebSocket, PWA, OAuth2</p>
+        <p class="pos-detail"><strong>Bài test:</strong> 4 giờ (UI + API Integration + Architecture)</p>
+        <div class="salary-range">💰 $2,500 - $4,000</div>
+      </div>
+
+      <div class="position-card priority-high">
+        <div class="pos-header">
+          <h3>🚀 DevOps Lead</h3>
+          <span class="priority-tag">Độ ưu tiên: Cao</span>
+        </div>
+        <p class="pos-detail"><strong>Kinh nghiệm:</strong> 5+ năm DevOps, 2+ năm Lead</p>
+        <p class="pos-detail"><strong>Stack:</strong> Kubernetes, Docker, Azure DevOps, GitHub Actions</p>
+        <p class="pos-detail"><strong>KPI 90 ngày:</strong> CI/CD, Environment Setup, Monitoring</p>
+        <div class="salary-range">💰 $3,000 - $5,000</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section">
+    <h2 class="section-title"><span class="icon">📅</span> Timeline Triển Khai Chi Tiết (12 Tuần)</h2>
+
+    <div class="timeline">
+
+      <!-- Phase 1 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-week">TUẦN 1-2 | Giai đoạn 1</span>
+          <h3>Chuẩn Bị Nền Tảng Tuyển Dụng</h3>
+          <p><strong>Mục tiêu:</strong> Hoàn thiện toàn bộ hạ tầng tuyển dụng trước khi tìm ứng viên.</p>
+          <ul style="margin-top:10px; padding-left:20px; color:var(--gray); font-size:0.92rem;">
+            <li>Thành lập Ban Dự Án Công Nghệ (CEO, HR Head, Board Rep, Tech Advisor)</li>
+            <li>Xây dựng 7 JD chuẩn + Career Path + KPI Framework</li>
+            <li>Thiết lập quy trình tuyển 7 bước (≤ 15 ngày/vị trí)</li>
+          </ul>
+
+          <div class="practical-box">
+            <h4>💼 Chi Tiết Thực Tế Triển Khai</h4>
+            <ul>
+              <li><strong>Ngày 1-2:</strong> Kick-off meeting với CEO & HR Head. Duyệt ngân sách nhân sự năm 1 (~$350K - $450K)</li>
+              <li><strong>Ngày 3-4:</strong> Ký hợp đồng với 2-3 headhunter chuyên IT (Tophead, ITviec Talent, Navigat Search)</li>
+              <li><strong>Ngày 5-7:</strong> Viết JD trên template chuẩn, đăng lên LinkedIn, TopDev, ITviec, VietnamWorks</li>
+              <li><strong>Công cụ:</strong> Greenhouse/Bitrix24 cho ATS, Slack channel #hiring-tech-core</li>
+              <li><strong>Ngân sách tuyển dụng:</strong> ~$15,000 (headhunter fee 15-20% lương năm cho 3 vị trí leadership)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-week">TUẦN 3-5 | Giai đoạn 2</span>
+          <h3>Tuyển Leadership Team (3 vị trí quản lý sẽ do CEO trực tiếp phỏng vấn)</h3>
+          <p><strong>Thứ tự ưu tiên:</strong> DM → SA → PM</p>
+
+          <div class="practical-box">
+            <h4>🎯 Chiến Lược Sourcing Thực Tế</h4>
+            <ul>
+              <li><strong>DM:</strong> Headhunt trực tiếp do HR phụ trách tìm kiếm. Ngân sách headhunt: 1 tháng lương</li>
+              <li><strong>SA:</strong> Sourcing từ các công ty outsourcing lớn (FPT Software, KMS, NashTech)</li>
+              <li><strong>PM:</strong> Ưu tiên ứng viên có chứng chỉ PMP + kinh nghiệm Core Banking</li>
+              <li><strong>Vòng phỏng vấn:</strong> HR Screen (30') → Technical (90') → Case Study (2h) → CEO Final (60')</li>
+              <li><strong>Offer:</strong> Gửi trong 48h sau vòng cuối. Package gồm: Lương + Bonus 2-4 tháng + ESOP 0.5-2%</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-week">TUẦN 6-9 | Giai đoạn 3</span>
+          <h3>Tuyển Engineering Core (4 vị trí kỹ thuật - do DM/PM trực tiếp phỏng vấn)</h3>
+          <p><strong>Thứ tự:</strong> Senior Backend → Senior Frontend → DevOps Lead → QC Lead</p>
+
+          <div class="practical-box">
+            <h4>🔬 Bài Test Kỹ Thuật Chi Tiết (4 giờ)</h4>
+            <ul>
+              <li><strong>Backend:</strong> Thiết kế REST API cho Payment Gateway + Schema DB + JWT Auth + Review bảo mật</li>
+              <li><strong>Frontend:</strong> Build component Dashboard giao dịch real-time + WebSocket + State Management</li>
+              <li><strong>DevOps:</strong> Viết Dockerfile + GitHub Actions CI/CD + Kubernetes manifest + Monitoring setup</li>
+              <li><strong>QC Lead:</strong> Thiết kế Test Plan cho luồng chuyển tiền + Automation Framework demo + Risk Assessment</li>
+			  <li><strong>Vòng phỏng vấn:</strong> HR Screen (30') → Testing (30') → Technical/Final (30')</li>
+              <li><strong>Nền tảng test:</strong> HackerRank Enterprise hoặc trang nội bộ Công ty</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-week">TUẦN 10-11 | Giai đoạn 4</span>
+          <h3>Workshop Chiến Lược & Đồng Bộ Tầm Nhìn</h3>
+
+          <div class="practical-box">
+            <h4>📊 3 Workshop Bắt Buộc (mỗi workshop 1 ngày)</h4>
+            <ul>
+              <li><strong>Product Vision Workshop:</strong> PM chủ trì + CEO + DM. Output: Vision Canvas, User Personas, Value Proposition</li>
+              <li><strong>Technology Vision Workshop:</strong> DM chủ trì. Output: Tech Stack Decision, Build vs Buy Analysis</li>
+              <li><strong>Architecture Workshop:</strong> SA chủ trì. Output: C4 Model Diagrams, ADRs (Architecture Decision Records)</li>
+              <li><strong>Địa điểm:</strong> Toà nhà Linco, 61A-63A Võ Văn Tần, Phường Xuân Hòa (Quận 3), TP.HCM.</li>
+              <li><strong>Công cụ:</strong> Confluence/OD/GD cho tài liệu hóa</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 5 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-week">TUẦN 12 | Giai đoạn 5</span>
+          <h3>Thiết Lập Năng Lực Tổ Chức & Sẵn Sàng MVP</h3>
+
+          <div class="practical-box">
+            <h4>🛠️ Deliverables Cuối Kỳ</h4>
+            <ul>
+              <li><strong>Agile Setup:</strong> Jira board, 2-week sprints, Daily 15', Sprint Review & Retro</li>
+              <li><strong>DevSecOps Pipeline:</strong> Git → Build → Unit Test → SonarQube → OWASP ZAP → Deploy (Azure/AWS)</li>
+              <li><strong>Environments:</strong> Dev, Staging, UAT, Production trên Kubernetes (AKS/EKS)</li>
+              <li><strong>Monitoring:</strong> Datadog/New Relic + Grafana + PagerDuty cho on-call</li>
+              <li><strong>Documentation Hub:</strong> Confluence với 5 tài liệu cốt lõi đã được phê duyệt</li>
+              <li><strong>Sprint 0:</strong> Chạy thử 2 tuần với MVP feature đầu tiên (Proof of Concept)</li>
+            </ul>
+          </div>
+
+          <h4 style="margin-top:20px; color:var(--primary);">🧰 Tech Stack (dự kiến)</h4>
+          <div class="tools-grid">
+            <div class="tool-chip">Java Spring Boot / .NET 8</div>
+            <div class="tool-chip">React + Next.js 14</div>
+            <div class="tool-chip">PostgreSQL + Redis</div>
+            <div class="tool-chip">Apache Kafka</div>
+            <div class="tool-chip">Kubernetes (AKS)</div>
+            <div class="tool-chip">Azure DevOps + GitHub</div>
+            <div class="tool-chip">SonarQube + OWASP ZAP</div>
+            <div class="tool-chip">Datadog + Grafana</div>
+            <div class="tool-chip">Jira + Confluence</div>
+            <div class="tool-chip">Slack + Teams</div>
+            <div class="tool-chip">Figma (Design)</div>
+            <div class="tool-chip">1Password (Secrets)</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPETENCY MATRIX -->
+  <div class="section">
+    <h2 class="section-title"><span class="icon">📊</span> Ma Trận Năng Lực Tối Thiểu</h2>
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th>Năng lực</th>
+          <th>DM</th>
+          <th>PM</th>
+          <th>SA</th>
+          <th>QC Lead</th>
+          <th>BE/FE</th>
+          <th>DevOps Lead</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Banking Domain</td>
+          <td><span class="score-badge score-5">5/5</span></td>
+          <td><span class="score-badge score-4">4/5</span></td>
+          <td><span class="score-badge score-4">4/5</span></td>
+          <td><span class="score-badge score-3">3/5</span></td>
+          <td><span class="score-badge score-3">3/5</span></td>
+          <td><span class="score-badge score-2">2/5</span></td>
+        </tr>
+        <tr>
+          <td>Leadership</td>
+          <td><span class="score-badge score-5">5/5</span></td>
+          <td><span class="score-badge score-4">4/5</span></td>
+          <td><span class="score-badge score-3">3/5</span></td>
+          <td><span class="score-badge score-5">5/5</span></td>
+          <td><span class="score-badge score-2">2/5</span></td>
+          <td><span class="score-badge score-4">4/5</span></td>
+        </tr>
+        <tr>
+          <td>Architecture</td>
+          <td><span class="score-badge score-5">5/5</span></td>
+          <td><span class="score-badge score-2">2/5</span></td>
+          <td><span class="score-badge score-5">5/5</span></td>
+          <td><span class="score-badge score-4">4/5</span></td>
+          <td><span class="score-badge score-3">3/5</span></td>
+          <td><span class="score-badge score-3">3/5</span></td>
+        </tr>
+        <tr>
+          <td>Security</td>
+          <td><span class="score-badge score-5">5/5</span></td>
+          <td><span class="score-badge score-2">2/5</span></td>
+          <td><span class="score-badge score-5">5/5</span></td>
+          <td><span class="score-badge score-4">4/5</span></td>
+          <td><span class="score-badge score-4">4/5</span></td>
+          <td><span class="score-badge score-5">5/5</span></td>
+        </tr>
+        <tr>
+          <td>DevSecOps</td>
+          <td><span class="score-badge score-5">5/5</span></td>
+          <td><span class="score-badge score-1">1/5</span></td>
+          <td><span class="score-badge score-4">4/5</span></td>
+          <td><span class="score-badge score-4">4/5</span></td>
+          <td><span class="score-badge score-3">3/5</span></td>
+          <td><span class="score-badge score-5">5/5</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BUDGET -->
+  <div class="section">
+    <h2 class="section-title"><span class="icon">💵</span> Dự Toán Ngân Sách 90 Ngày Đầu</h2>
+    <table class="budget-table">
+      <thead>
+        <tr>
+          <th>Hạng mục</th>
+          <th>Chi tiết</th>
+          <th style="text-align:right;">Ước tính (USD)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Lương 7 vị trí (3 tháng)</strong></td>
+          <td>Lương gross trung bình $3,800 x 7 x 3 tháng</td>
+          <td style="text-align:right;">$80,000</td>
+        </tr>
+        <tr>
+          <td><strong>Headhunter fees</strong></td>
+          <td>15-20% lương năm cho 3 vị trí leadership (DM, SA, PM)</td>
+          <td style="text-align:right;">$25,000</td>
+        </tr>
+        <tr>
+          <td><strong>Job posting & sourcing</strong></td>
+          <td>LinkedIn Recruiter, TopDev, ITviec Premium (3 tháng)</td>
+          <td style="text-align:right;">$3,500</td>
+        </tr>
+        <tr>
+          <td><strong>Testing platforms</strong></td>
+          <td>HackerRank/Codility + background check</td>
+          <td style="text-align:right;">$2,000</td>
+        </tr>
+        <tr>
+          <td><strong>Equipment & Workspace</strong></td>
+          <td>7 laptop MacBook/Dell XPS + màn hình + ghế ergonomic</td>
+          <td style="text-align:right;">$18,000</td>
+        </tr>
+        <tr>
+          <td><strong>Cloud & Tools (3 tháng)</strong></td>
+          <td>Azure/AWS + Jira + Confluence + Datadog + GitHub Enterprise</td>
+          <td style="text-align:right;">$8,000</td>
+        </tr>
+        <tr>
+          <td><strong>Workshop & Team Building</strong></td>
+          <td>3 chiến lược workshop + onboarding events</td>
+          <td style="text-align:right;">$3,500</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2"><strong>TỔNG CỘNG NGÂN SÁCH 90 NGÀY</strong></td>
+          <td style="text-align:right;">~ $140,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SUCCESS CRITERIA -->
+  <div class="section">
+    <h2 class="section-title"><span class="icon">✅</span> Tiêu Chí Thành Công Sau 90 Ngày</h2>
+    <div class="criteria-grid">
+      <div class="criteria-card hr">
+        <h4>👥 Về Nhân Sự</h4>
+        <ul>
+          <li>Tuyển đủ 7 vị trí cốt lõi</li>
+          <li>Offer Acceptance Rate ≥ 80%</li>
+          <li>Onboarding completion 100%</li>
+          <li>Time-to-hire trung bình ≤ 25 ngày/vị trí</li>
+        </ul>
+      </div>
+      <div class="criteria-card org">
+        <h4>🏢 Về Tổ Chức</h4>
+        <ul>
+          <li>Cơ cấu tổ chức được BGĐ phê duyệt</li>
+          <li>RACI matrix rõ ràng cho 7 vị trí</li>
+          <li>Agile vận hành thực tế (≥ 2 sprints)</li>
+          <li>Coding Standards được adopt 100%</li>
+        </ul>
+      </div>
+      <div class="criteria-card tech">
+        <h4>⚙️ Về Công Nghệ</h4>
+        <ul>
+          <li>Target Architecture hoàn thành & review</li>
+          <li>DevSecOps Foundation pipeline chạy ổn định</li>
+          <li>4 environments (Dev/Staging/UAT/Prod) sẵn sàng</li>
+          <li>Monitoring & Alerting hoạt động</li>
+        </ul>
+      </div>
+      <div class="criteria-card prod">
+        <h4>📦 Về Sản Phẩm</h4>
+        <ul>
+          <li>Product Vision & Roadmap 12 tháng</li>
+          <li>MVP Backlog được refine (≥ 50 user stories)</li>
+          <li>Sprint 0 hoàn thành (PoC feature)</li>
+          <li>Sẵn sàng kick-off Sprint 1</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- RISKS -->
+  <div class="section">
+    <h2 class="section-title"><span class="icon">⚠️</span> Rủi Ro & Phương Án Dự Phòng</h2>
+    <div class="risk-list">
+      <div class="risk-item">
+        <h4>🔴 Không tuyển đủ 7 người trong 90 ngày</h4>
+        <p>Thị trường nhân sự IT cấp cao tại HCM khan hiếm, đặc biệt là Banking domain.</p>
+        <div class="mitigation"><strong>Giải pháp:</strong> Mở rộng sourcing sang Việt kiều, remote workers; cân nhắc contractor 6 tháng đầu cho 1-2 vị trí; tăng ngân sách headhunt lên 25% nếu quá tuần 8 chưa đủ 50% KPI.</div>
+      </div>
+      <div class="risk-item">
+        <h4>🔴 DM/SA không phù hợp văn hóa</h4>
+        <p>Rủi ro "star performer but bad culture fit" - rất phổ biến ở vị trí leadership.</p>
+        <div class="mitigation"><strong>Giải pháp:</strong> Thêm vòng "Culture Interview" với CEO; probation 2 tháng với KPI rõ ràng; có plan B từ vòng phỏng vấn (luôn giữ 2 finalist).</div>
+      </div>
+      <div class="risk-item">
+        <h4>🔴 Chậm tiến độ do phụ thuộc vào 3 vị trí đầu</h4>
+        <p>DM, PM, SA khó tìm, tuyển chậm sẽ ảnh hưởng tuyển 4 vị trí còn lại.</p>
+        <div class="mitigation"><strong>Giải pháp:</strong> CEO + Tech Advisor đảm nhận tạm vai trò DM/PM để tuyển 4 vị trí technical trong thời gian đầu; song song tuyển PM và SA để không bị bottleneck.</div>
+      </div>
+      <div class="risk-item">
+        <h4>🔴 Ngân sách vượt dự toán</h4>
+        <p>Giá nhân sự IT senior tại VN tăng 15-20%/năm, đặc biệt sau đợt Tết.</p>
+        <div class="mitigation"><strong>Giải pháp:</strong> Dành 15% contingency budget (~$21K); cân nhắc mix giữa full-time + contractor; đàm phán ESOP thay vì lương cao với ứng viên muốn long-term gain.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROPOSAL -->
+  <div class="proposal-box">
+    <h2>💡 Đề Xuất Trình Ban Giám Đốc</h2>
+    <p>
+      Quyết định quan trọng nhất để plan thành công <strong>không phải là công nghệ hay tiết kiệm chi phí</strong> mà là 
+      <span class="highlight-text">tuyển đúng người vào đúng việc</span>.
+      <br><br>
+      Các vị trí key sẽ quyết định đến <strong>70-80% thành công</strong> của toàn bộ tổ chức công nghệ trong 
+      <span class="highlight-text">2-3 năm tiếp theo</span>. Sau khi các vị trí này được tuyển thành công, 
+      việc mở rộng đội ngũ kỹ thuật sẽ <strong>nhanh hơn, đúng định hướng hơn</strong> và giảm đáng kể rủi ro 
+      tuyển sai người, tốn thời gian và không tạo được niềm tin cho khách hàng .
+    </p>
+    <p style="margin-top:20px; font-size:0.95rem; opacity:0.95;">
+      📌 <strong>Next Steps đề xuất:</strong><br>
+      1. BGĐ góp ý về ngân sách/chi phí hợp lí<br>
+      2. Hỗ trợ các thủ tục ký hợp đồng nhanh gọn<br>
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p><strong>ALPHAWAY TECHNOLOGY TEAM PLAN</strong> | Version 2.0 | Cập nhật: Tháng 8/2026</p>
+    <p style="margin-top:8px; font-size:0.85rem;">Tài liệu mật - Chỉ sử dụng nội bộ tại Công ty</p>
+  </div>
+
+</div>
+
+</body>
+</html>
