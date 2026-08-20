@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kế Hoạch 90 Ngày Tối Ưu - Fintech/Digital Banking MVP (v2.0)</title>
+    <style>
+        :root {
+            --primary: #0a2540;
+            --accent: #f39c12;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --info: #2980b9;
+            --purple: #8e44ad;
+            --bg: #f4f7f6;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --text-light: #666666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #1a4a7a);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        header h1 { margin: 0; font-size: 2.5em; }
+        header p { font-size: 1.2em; opacity: 0.9; margin-top: 10px; }
+        .version-tag {
+            display: inline-block;
+            background: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .card h3 {
+            color: var(--info);
+            border-bottom: 2px dashed #eee;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+            margin-right: 5px;
+        }
+        .badge-new { background-color: var(--accent); }
+        .badge-dm { background-color: var(--purple); }
+        .badge-hr { background-color: #16a085; }
+        .badge-tool { background-color: var(--info); }
+        .badge-risk { background-color: var(--danger); }
+        .badge-done { background-color: var(--success); }
+        .badge-phase { background-color: var(--primary); font-size: 1em; padding: 6px 14px; }
+
+        .highlight {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .text-accent { color: var(--accent); font-weight: bold; }
+        .text-success { color: var(--success); font-weight: bold; }
+        .text-danger { color: var(--danger); font-weight: bold; }
+        .text-purple { color: var(--purple); font-weight: bold; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+        tr:hover { background-color: #f9f9f9; }
+
+        .timeline { position: relative; padding: 10px 0; }
+        .timeline-item {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent);
+        }
+        .timeline-item strong { color: var(--primary); }
+        .timeline-item.dm-task { border-left-color: var(--purple); background: #f5eef8; }
+        .timeline-item.hr-task { border-left-color: #16a085; background: #e8f8f5; }
+
+        .tech-stack {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+        .tech-stack span { color: #ffeaa7; font-weight: bold; }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .alert-warning { background-color: #fff3cd; border-left: 5px solid var(--accent); }
+        .alert-danger { background-color: #f8d7da; border-left: 5px solid var(--danger); }
+        .alert-info { background-color: #d1ecf1; border-left: 5px solid var(--info); }
+        .alert-purple { background-color: #f3e5f5; border-left: 5px solid var(--purple); }
+
+        .org-chart {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            margin: 20px 0;
+            border: 2px dashed #ccc;
+        }
+        .org-chart .ceo { color: var(--primary); font-weight: bold; font-size: 1.2em; }
+        .org-chart .dm { color: var(--purple); font-weight: bold; font-size: 1.1em; }
+        .org-chart .role { color: var(--info); }
+
+        .phase-header {
+            background: linear-gradient(135deg, var(--primary), #1a4a7a);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px 10px 0 0;
+            margin: -25px -25px 20px -25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .phase-header h2 { color: white; border: none; padding: 0; margin: 0; }
+        .phase-header .duration {
+            background: var(--accent);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .kpi-box {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            border: 2px solid var(--success);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        .kpi-box .kpi-title { color: var(--text-light); font-size: 0.9em; }
+        .kpi-box .kpi-value { color: var(--success); font-size: 1.8em; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🚀 KẾ HOẠCH 90 NGÀY </h1>
+        <p>Xây dựng đội ngũ Key đáp ứng công việc Fintech / Digital Banking</p>
+        <div class="version-tag">VERSION 1.0 — BAO GỒM VAI TRÒ DELIVERY MANAGER (DM)</div>
+    </header>
+
+    <!-- TỔNG QUAN -->
+    <div class="card">
+        <h2>🎯 Mục Tiêu & Mô Hình Cốt Lõi</h2>
+        <p>Không xây dựng tổ chức cồng kềnh, tập trung nguồn lực vào <span class="highlight">3 vị trí "Key Person"</span> để vừa thực thi, vừa xây nền tảng, tối ưu chi phí và tham gia dự án nhanh nhất.</p>
+
+        <div class="org-chart">
+            <div class="ceo">👔 CEO</div>
+            <div>│</div>
+            <div class="dm">🎯 DELIVERY MANAGER (DM) — <em>Người triển khai & điều phối kế hoạch này</em></div>
+            <div>├──────────────────────────────┤</div>
+            <div class="role">📋 Business Analyst &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 💻 Technical Lead</div>
+            <div class="role">(Finance & Banking) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Senior Full Stack)</div>
+        </div>
+
+        <div class="grid-3">
+            <div class="kpi-box">
+                <div class="kpi-title">Vị trí cần tuyển mới</div>
+                <div class="kpi-value">02</div>
+                <div>BA + Tech Lead</div>
+            </div>
+            <div class="kpi-box">
+                <div class="kpi-title">Người triển khai</div>
+                <div class="kpi-value">01</div>
+                <div>Delivery Manager</div>
+            </div>
+            <div class="kpi-box">
+                <div class="kpi-title">Thời gian đến MVP</div>
+                <div class="kpi-value">90</div>
+                <div>ngày</div>
+            </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 20px;">
+            <div>
+                <h3>👔 CEO</h3>
+                <ul>
+                    <li>Quyết định chiến lược</li>
+                    <li>Duyệt ngân sách & scope</li>
+                    <li>Đánh giá DM cuối kỳ</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: var(--purple);">🎯 Delivery Manager (DM)</h3>
+                <ul>
+                    <li><strong>Quản lý trực tiếp</strong> BA & Tech Lead</li>
+                    <li>Triển khai kế hoạch 90 ngày</li>
+                    <li>Báo cáo tiến độ cho CEO</li>
+                    <li>Chuẩn bị bài test, đào tạo, đánh giá</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: var(--info);">👥 BA & Tech Lead</h3>
+                <ul>
+                    <li>Thực thi nghiệp vụ & kỹ thuật</li>
+                    <li>Xây dựng MVP</li>
+                    <li>Báo cáo cho DM</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- GIAI ĐOẠN 1 -->
+    <div class="card" style="border-left-color: var(--accent);">
+        <div class="phase-header">
+            <h2>📅 GIAI ĐOẠN 1: CHUẨN BỊ & TUYỂN DỤNG</h2>
+            <span class="duration">TUẦN 1 - 2</span>
+        </div>
+
+        <div class="alert alert-purple">
+            <strong>🎯 Vai trò then chốt của DM:</strong> DM là người <span class="text-purple">trực tiếp chuẩn bị mọi thứ</span> để đón 2 nhân sự mới, đồng thời phối hợp với HR để đẩy nhanh tiến độ tuyển dụng. HR chỉ lo phần sourcing & hành chính, DM lo phần chuyên môn.
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3>🎯 Công việc của DM (Tuần 1-2)</h3>
+                <div class="timeline">
+                    <div class="timeline-item dm-task">
+                        <strong>📝 Tuần 1 - Chuẩn bị nền</strong>
+                        <ul>
+                            <li>Xây dựng <strong>Job Description chi tiết</strong> cho BA & Tech Lead (dựa trên tài liệu Công ty hoặc tạo mới)</li>
+                            <li>Soạn <strong>bộ câu hỏi phỏng vấn chuyên môn</strong> (20 câu BA, 20 câu Tech Lead)</li>
+                            <li>Thiết kế <strong>2 bài test thực tế</strong>:
+                                <ul>
+                                    <li>BA: Case study eKYC Onboarding</li>
+                                    <li>Tech Lead: System Design + Coding</li>
+                                </ul>
+                            </li>
+                            <li>Chuẩn bị <strong>tiêu chuẩn đánh giá</strong> </li>
+                            <li>Thiết lập <strong>môi trường làm việc</strong> (tài khoản Jira, GitLab, Slack, email công ty...)</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item dm-task">
+                        <strong>📚 Tuần 2 - Chuẩn bị chương trình Onboarding & Thử việc</strong>
+                        <ul>
+                            <li>Soạn <strong>chương trình đào tạo nội bộ 5 ngày</strong> cho BA & Tech Lead</li>
+                            <li>Nội dung<strong> chương trình đào tạo nội bộ</strong>:
+                                <ul>
+                                    <li>Ngày 1-2: Giới thiệu sản phẩm, vision, domain Banking</li>
+                                    <li>Ngày 3-4: Training công cụ (Jira, Swagger, Git workflow)</li>
+                                    <li>Ngày 5: Kick-off dự án MVP</li>
+                                </ul>
+                            </li>
+                            <li>Chuẩn bị <strong>bộ bài tập thử việc 8 tuần</strong> (xem Giai đoạn 2)</li>
+                            <li>Thiết lập <strong>cơ chế báo cáo</strong>: Daily Standup format, Weekly Report template cho CEO</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>👥 Công việc của HR (Song song với DM)</h3>
+                <div class="timeline">
+                    <div class="timeline-item hr-task">
+                        <strong>📢 Tuần 1 - Phát tin tuyển dụng</strong>
+                        <ul>
+                            <li>Đăng JD lên các kênh (theo chiến lược của HR)</li>
+                            <li>Kích hoạt mạng lưới Headhunter</li>
+                            <li>Sàng lọc CV ban đầu theo tiêu chí DM đưa</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item hr-task">
+                        <strong>📞 Tuần 2 - Sắp xếp phỏng vấn</strong>
+                        <ul>
+                            <li>Lịch phỏng vấn Vòng 1 (HR + DM)</li>
+                            <li>Lịch phỏng vấn Vòng 2 (DM + CEO/Expert)</li>
+                            <li>Arrange bài test thực tế</li>
+                            <li>Background check & Offer</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert alert-info" style="margin-top: 15px;">
+                    <strong>💡 Nguyên tắc phân công:</strong><br>
+                    <span class="text-purple">DM</span> = Chất lượng ứng viên (chuyên môn, văn hóa)<br>
+                    <span style="color: #16a085;">HR</span> = Số lượng & tiến độ (sourcing, logistics, lương thưởng)
+                </div>
+            </div>
+        </div>
+
+        <h3>✅ Deliverables cuối Giai đoạn 1 (DM bàn giao)</h3>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Deliverable</th>
+                <th>Người thực hiện</th>
+                <th>Trạng thái</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Bộ JD + thang chấm điểm cho BA & Tech Lead</td>
+                <td>DM</td>
+                <td><span class="badge badge-done">HOÀN THÀNH</span></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Bộ câu hỏi phỏng vấn chuyên môn (40 câu)</td>
+                <td>DM</td>
+                <td><span class="badge badge-done">HOÀN THÀNH</span></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2 bài test thực tế (Case study + System Design)</td>
+                <td>DM</td>
+                <td><span class="badge badge-done">HOÀN THÀNH</span></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Onboarding Plan & Training Program</td>
+                <td>DM</td>
+                <td><span class="badge badge-done">HOÀN THÀNH</span></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Danh sách ứng viên đạt yêu cầu chuyên môn</td>
+                <td>DM + HR</td>
+                <td><span class="badge badge-done">HOÀN THÀNH</span></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>2 nhân sự chính thức nhận việc (BA + Tech Lead)</td>
+                <td>HR</td>
+                <td><span class="badge badge-done">HOÀN THÀNH</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- GIAI ĐOẠN 2 -->
+    <div class="card" style="border-left-color: var(--info);">
+        <div class="phase-header" style="background: linear-gradient(135deg, var(--info), #3498db);">
+            <h2>🛠️ GIAI ĐOẠN 2: ONBOARDING, THỬ VIỆC & TRIỂN KHAI</h2>
+            <span class="duration">TUẦN 3 - 10 (8 TUẦN)</span>
+        </div>
+
+        <div class="alert alert-info">
+            <strong>🎯 Mục tiêu kép của giai đoạn này:</strong><br>
+            ① <strong>Đánh giá năng lực thực tế</strong> của BA & Tech Lead trong môi trường làm việc thật (thời gian thử việc)<br>
+            ② <strong>Xây dựng nền tảng</strong> nghiệp vụ & kỹ thuật cho MVP
+        </div>
+
+        <h3>📋 Phân bổ 8 tuần thử việc</h3>
+        <table>
+            <tr>
+                <th>Giai đoạn</th>
+                <th>Thời gian</th>
+                <th>Mục tiêu</th>
+                <th>Output</th>
+            </tr>
+            <tr>
+                <td><strong>Onboarding</strong></td>
+                <td>Tuần 3</td>
+                <td>Hội nhập, training công cụ, hiểu domain</td>
+                <td>Hiểu sản phẩm, setup môi trường</td>
+            </tr>
+            <tr>
+                <td><strong>Bài tập số 1</strong></td>
+                <td>Tuần 4-5</td>
+                <td>Chứng minh năng lực nền tảng</td>
+                <td>BRD Draft + Architecture Draft</td>
+            </tr>
+            <tr>
+                <td><strong>Bài tập số 2</strong></td>
+                <td>Tuần 6-8</td>
+                <td>Triển khai thực tế MVP (core features)</td>
+                <td>MVP Alpha + UAT Plan</td>
+            </tr>
+            <tr>
+                <td><strong>Bài tập số 3</strong></td>
+                <td>Tuần 9-10</td>
+                <td>Hoàn thiện, tích hợp, chuẩn bị demo</td>
+                <td>MVP Beta + Documentation</td>
+            </tr>
+        </table>
+
+        <div class="grid-2">
+            <div>
+                <h3>📋 Bài tập thử việc cho BA</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>Tuần 3: Onboarding</strong>
+                        <ul>
+                            <li>Đọc hiểu Product Vision, Business Model</li>
+                            <li>Training công cụ: Jira, Confluence, Figma, Draw.io</li>
+                            <li>Shadow DM trong các cuộc họp với stakeholder</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Tuần 4-5: Bài tập 1 - Phân tích nghiệp vụ</strong>
+                        <ul>
+                            <li>Viết <strong>BRD</strong> cho module eKYC Onboarding</li>
+                            <li>Vẽ <strong>User Journey + BPMN</strong> chi tiết</li>
+                            <li>Viết <strong>10 User Stories</strong> theo chuẩn <strong><font color=blue>Alphaway</font></strong></li>
+                            <li>Phối hợp Tech Lead để thống nhất API Contract</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Tuần 6-8: Bài tập 2 - MVP Backlog</strong>
+                        <ul>
+                            <li>Hoàn thiện <strong>MVP Backlog</strong> (30-40 user stories)</li>
+                            <li>Viết <strong>UAT Plan</strong> & Test Cases</li>
+                            <li>Phối hợp BA ngân hàng đối tác (nếu có) để validate</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Tuần 9-10: Bài tập 3 - UAT & Refine</strong>
+                        <ul>
+                            <li>Thực hiện <strong>UAT</strong> trên MVP Beta</li>
+                            <li>Thu thập feedback, refine backlog</li>
+                            <li>Viết <strong>tài liệu hướng dẫn sử dụng</strong> cho end-user</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>💻 Bài tập thử việc cho Tech Lead</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>Tuần 3: Onboarding</strong>
+                        <ul>
+                            <li>Setup môi trường: Git, CI/CD, Dev/Staging servers</li>
+                            <li>Training quy trình: Git flow, Code review, PR template</li>
+                            <li>Review kiến trúc đề xuất với DM</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Tuần 4-5: Bài tập 1 - Nền tảng kỹ thuật</strong>
+                        <ul>
+                            <li>Hoàn thiện <strong>Solution Design Document</strong></li>
+                            <li>Setup <strong>Source Code Structure</strong> + Coding Standards</li>
+                            <li>Xây dựng <strong>Authentication Framework</strong> (OAuth2/JWT)</li>
+                            <li>Thiết kế <strong>Database Schema</strong> core</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Tuần 6-8: Bài tập 2 - Core MVP</strong>
+                        <ul>
+                            <li>Code <strong>Customer API + Account API</strong></li>
+                            <li>Code <strong>eKYC Integration</strong> (OCR + Face Match)</li>
+                            <li>Xây dựng <strong>Frontend Onboarding Screen</strong></li>
+                            <li>Setup <strong>CI/CD Pipeline</strong> tự động</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Tuần 9-10: Bài tập 3 - Tích hợp & Ổn định</strong>
+                        <ul>
+                            <li>Integrate các module, xử lý <strong>Reconciliation</strong></li>
+                            <li>Setup <strong>Logging & Monitoring</strong></li>
+                            <li>Performance test, Security scan (OWASP)</li>
+                            <li>Chuẩn bị <strong>demo cho CEO</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>🔄 Cơ chế quản lý của DM trong 8 tuần</h3>
+        <table>
+            <tr>
+                <th>Hoạt động</th>
+                <th>Tần suất</th>
+                <th>DM làm gì</th>
+                <th>Output cho CEO</th>
+            </tr>
+            <tr>
+                <td><strong>Daily Standup</strong></td>
+                <td>15p / Ngày</td>
+                <td>Điều phối, gỡ rối (blockers) ngay lập tức</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><strong>Sprint Planning</strong></td>
+                <td>2 tuần / lần</td>
+                <td>Duyệt scope, phân công, chốt Acceptance Criteria</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><strong>Code/Doc Review</strong></td>
+                <td>Hàng ngày</td>
+                <td>Review chất lượng, đảm bảo đúng chuẩn</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><strong>Weekly Report</strong></td>
+                <td>Thứ 6 hàng tuần</td>
+                <td>Tổng hợp tiến độ, rủi ro, kế hoạch tuần sau</td>
+                <td><span class="badge badge-tool">BÁO CÁO CEO</span></td>
+            </tr>
+            <tr>
+                <td><strong>Checkpoint 1 tháng</strong></td>
+                <td>Cuối tuần 6</td>
+                <td>Đánh giá giữa kỳ, quyết định tiếp tục/điều chỉnh</td>
+                <td><span class="badge badge-tool">BÁO CÁO CEO</span></td>
+            </tr>
+        </table>
+
+        <div class="alert alert-warning">
+            <strong>⚠️ Cơ chế "Early Warning" của DM:</strong><br>
+            DM theo dõi <strong>3 tín hiệu cảnh báo sớm</strong> để báo CEO kịp thời:
+            <ul>
+                <li><span class="text-danger">🔴 Đỏ:</span> Không hoàn thành deliverable đúng hạn 2 lần liên tiếp → Xem xét chấm dứt thử việc</li>
+                <li><span class="text-accent">🟡 Vàng:</span> Chất lượng code/doc dưới chuẩn, cần review lại nhiều → DM kèm cặp thêm</li>
+                <li><span class="text-success">🟢 Xanh:</span> Hoàn thành sớm, chất lượng tốt → Xem xét thưởng nóng / tăng scope</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- GIAI ĐOẠN 3 -->
+    <div class="card" style="border-left-color: var(--success);">
+        <div class="phase-header" style="background: linear-gradient(135deg, var(--success), #229954);">
+            <h2>✅ GIAI ĐOẠN 3: VỀ ĐÍCH & ĐÁNH GIÁ NĂNG LỰC</h2>
+            <span class="duration">TUẦN 11 - 12</span>
+        </div>
+
+        <div class="alert alert-purple">
+            <strong>🎯 Vai trò then chốt của DM:</strong> DM là người <span class="text-purple">trực tiếp đánh giá năng lực</span> của BA & Tech Lead dựa trên output thực tế 10 tuần qua, từ đó tham mưu cho CEO quyết định <strong>giữ lại / gia hạn thử việc / dừng hợp tác</strong>.
+        </div>
+
+        <h3>📊 Bộ tiêu chí đánh giá năng lực (DM chấm điểm)</h3>
+        <div class="grid-2">
+            <div>
+                <h3 style="color: var(--info);">📋 Đánh giá BA</h3>
+                <table>
+                    <tr>
+                        <th>Tiêu chí</th>
+                        <th>Trọng số</th>
+                        <th>DM đánh giá qua</th>
+                    </tr>
+                    <tr>
+                        <td>Banking Domain Knowledge</td>
+                        <td><strong>30%</strong></td>
+                        <td>Chất lượng BRD, hiểu nghiệp vụ eKYC/Payment</td>
+                    </tr>
+                    <tr>
+                        <td>Requirement Analysis</td>
+                        <td><strong>25%</strong></td>
+                        <td>User Stories, Acceptance Criteria rõ ràng</td>
+                    </tr>
+                    <tr>
+                        <td>Collaboration với Tech Lead</td>
+                        <td><strong>20%</strong></td>
+                        <td>API Contract, phối hợp xử lý issue</td>
+                    </tr>
+                    <tr>
+                        <td>Documentation Quality</td>
+                        <td><strong>15%</strong></td>
+                        <td>BRD, UAT Plan, User Guide</td>
+                    </tr>
+                    <tr>
+                        <td>Attitude & Learning</td>
+                        <td><strong>10%</strong></td>
+                        <td>Tinh thần học hỏi, tiếp thu feedback</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h3 style="color: var(--info);">💻 Đánh giá Tech Lead</h3>
+                <table>
+                    <tr>
+                        <th>Tiêu chí</th>
+                        <th>Trọng số</th>
+                        <th>DM đánh giá qua</th>
+                    </tr>
+                    <tr>
+                        <td>System Design & Architecture</td>
+                        <td><strong>25%</strong></td>
+                        <td>Chất lượng Solution Design, C4 Model</td>
+                    </tr>
+                    <tr>
+                        <td>Backend Code Quality</td>
+                        <td><strong>25%</strong></td>
+                        <td>Code review, test coverage, security</td>
+                    </tr>
+                    <tr>
+                        <td>Frontend & Integration</td>
+                        <td><strong>20%</strong></td>
+                        <td>UI/UX, API integration, eKYC flow</td>
+                    </tr>
+                    <tr>
+                        <td>Delivery & Timeline</td>
+                        <td><strong>15%</strong></td>
+                        <td>Hoàn thành sprint đúng hạn</td>
+                    </tr>
+                    <tr>
+                        <td>Leadership Potential</td>
+                        <td><strong>15%</strong></td>
+                        <td>Khả năng dẫn dắt team tương lai</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h3>📝 DM thực hiện quy trình đánh giá (Tuần 11-12)</h3>
+        <div class="timeline">
+            <div class="timeline-item dm-task">
+                <strong>Tuần 11 - Thu thập dữ liệu đánh giá</strong>
+                <ul>
+                    <li>Tổng hợp <strong>10 tuần Weekly Report</strong> → đánh giá hiệu suất</li>
+                    <li>Review lại <strong>tất cả deliverables</strong> (BRD, Architecture, Code, Docs)</li>
+                    <li>Phỏng vấn 1-1 với BA & Tech Lead: <em>"Bạn học được gì? Khó khăn gì? Đề xuất gì?"</em></li>
+                    <li>Thu thập <strong>peer feedback</strong> (nếu có làm việc với stakeholder khác)</li>
+                    <li>Chấm điểm theo thang điểm ở trên</li>
+                </ul>
+            </div>
+            <div class="timeline-item dm-task">
+                <strong>Tuần 12 - Demo & Ra quyết định</strong>
+                <ul>
+                    <li>Tổ chức <strong>MVP Demo Day</strong> cho CEO & stakeholders</li>
+                    <li>BA trình bày nghiệp vụ, Tech Lead trình bày kỹ thuật</li>
+                    <li>DM viết <strong>Báo cáo đánh giá năng lực cuối kỳ</strong> (5-7 trang)</li>
+                    <li>DM tham mưu CEO 1 trong 3 quyết định (xem bên dưới)</li>
+                    <li>Thông báo kết quả cho BA & Tech Lead (trực tiếp, chuyên nghiệp)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>🎯 3 Kịch bản quyết định (DM tham mưu CEO)</h3>
+        <div class="grid-3">
+            <div class="alert" style="background: #d4edda; border-left: 5px solid var(--success); margin: 0;">
+                <strong style="color: var(--success);">🟢 KỊCH BẢN A: GIỮ LẠI CẢ HAI</strong><br>
+                <em>Khi: Điểm đánh giá ≥ 75% cho cả 2</em><br><br>
+                <strong>Hành động:</strong>
+                <ul>
+                    <li>Chuyển sang hợp đồng chính thức</li>
+                    <li>DM lập kế hoạch tuyển thêm Dev, QA, DevOps</li>
+                    <li>Bắt đầu Phase 2: Scale MVP</li>
+                </ul>
+            </div>
+            <div class="alert" style="background: #fff3cd; border-left: 5px solid var(--accent); margin: 0;">
+                <strong style="color: var(--accent);">🟡 KỊCH BẢN B: GIỮ 1, THAY 1</strong><br>
+                <em>Khi: 1 người ≥ 75%, 1 người 50-74%</em><br><br>
+                <strong>Hành động:</strong>
+                <ul>
+                    <li>Gia hạn thử việc người yếu thêm 1 tháng (có KPI rõ)</li>
+                    <li>Hoặc chấm dứt & tuyển mới (HR restart)</li>
+                    <li>DM điều chỉnh kế hoạch Phase 2</li>
+                </ul>
+            </div>
+            <div class="alert" style="background: #f8d7da; border-left: 5px solid var(--danger); margin: 0;">
+                <strong style="color: var(--danger);">🔴 KỊCH BẢN C: DỪNG CẢ HAI</strong><br>
+                <em>Khi: Điểm đánh giá < 50% cho cả 2</em><br><br>
+                <strong>Hành động:</strong>
+                <ul>
+                    <li>DM báo cáo CEO nguyên nhân gốc rễ</li>
+                    <li>Xem xét lại: JD? Rubric? Quy trình tuyển?</li>
+                    <li>Restart toàn bộ Giai đoạn 1 với bài học rút ra</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>✅ Deliverables cuối Giai đoạn 3 (DM bàn giao cho CEO)</h3>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Deliverable</th>
+                <th>Người thực hiện</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><strong>MVP Demo</strong> (eKYC Onboarding flow hoàn chỉnh)</td>
+                <td>BA + Tech Lead trình bày</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><strong>Báo cáo đánh giá năng lực</strong> BA & Tech Lead (có chấm điểm)</td>
+                <td>DM</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><strong>Đề xuất nhân sự</strong>: Giữ lại / Gia hạn / Dừng</td>
+                <td>DM tham mưu</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><strong>Kế hoạch Phase 2</strong> (nếu giữ lại): Timeline, ngân sách, headcount</td>
+                <td>DM</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><strong>Bài học rút ra</strong> (Lessons Learned) từ 90 ngày</td>
+                <td>DM</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- QUẢN TRỊ RỦI RO -->
+    <div class="card" style="border-left-color: var(--danger);">
+        <h2>⚠️ QUẢN TRỊ RỦI RO DÀNH RIÊNG CHO DM</h2>
+
+        <!-- <div class="alert alert-danger"> -->
+            <!-- <strong>🚨 Rủi ro 1: DM bị "quá tải" - ôm đồm cả chuyên môn lẫn quản lý</strong><br> -->
+            <!-- <em>DM phải vừa chuẩn bị tuyển, vừa đào tạo, vừa quản lý hàng ngày, vừa đánh giá.</em><br> -->
+            <!-- <strong>➡️ Giải pháp:</strong> CEO cần <span class="text-danger">bảo vệ thời gian của DM</span> - không giao việc ngoài luồng. HR phải gánh 100% phần sourcing & hành chính. Nếu DM quá tải, xem xét thuê Freelance Senior Dev để support Tech Lead. -->
+        <!-- </div> -->
+
+        <!-- <div class="alert alert-warning" style="margin-top: 15px;"> -->
+            <!-- <strong>⚠️ Rủi ro 2: DM đánh giá chủ quan, thiếu khách quan</strong><br> -->
+            <!-- <em>DM thân với BA/Tech Lead → đánh giá cao hơn thực tế.</em><br> -->
+            <!-- <strong>➡️ Giải pháp:</strong> CEO <span class="text-accent">tham gia trực tiếp vào MVP Demo Day</span> (Tuần 12) để có góc nhìn độc lập. Rubric chấm điểm phải có bằng chứng cụ thể (link code, link doc, email feedback). -->
+        <!-- </div> -->
+
+        <div class="alert alert-danger" style="margin-top: 15px;">
+            <strong>⚠️ Rủi ro 1: Tuyển không đủ người chuẩn trong 2 tuần đầu</strong><br>
+            <strong>➡️ Giải pháp:</strong> DM chuẩn bị sẵn <span class="highlight">danh sách backup 3-5 ứng viên</span> từ vòng 1. Nếu tuần 2 chưa chốt được, HR kéo dài thêm 1 tuần nhưng DM vẫn giữ tiến độ Onboarding Plan.
+        </div>
+
+        <div class="alert alert-warning" style="margin-top: 15px;">
+            <strong>⚠️ Rủi ro 2: BA & Tech Lead không "match" nhau</strong><br>
+            <em>Một người giỏi nhưng hai người không phối hợp được.</em><br>
+            <strong>➡️ Giải pháp:</strong> DM theo dõi sát <strong>chemical giữa 2 người</strong> ngay từ Tuần 3-4. Nếu có dấu hiệu conflict, DM can thiệp sớm (họp 3 người, rõ RACI). Nếu vẫn không cải thiện → tham mưu CEO thay 1 trong 2.
+        </div>
+    </div>
+
+    <!-- TIMELINE TỔNG -->
+    <div class="card" style="border-left-color: var(--primary);">
+        <h2>🗓️ TIMELINE TỔNG 90 NGÀY - GÓC NHÌN DM</h2>
+        <table>
+            <tr>
+                <th>Tuần</th>
+                <th>DM làm gì</th>
+                <th>HR làm gì</th>
+                <th>BA & Tech Lead</th>
+                <th>CEO nhận gì</th>
+            </tr>
+            <tr>
+                <td><strong>1-2</strong></td>
+                <td>Soạn JD, test, rubric, onboarding plan</td>
+                <td>Đăng tuyển, lọc CV, sắp xếp phỏng vấn</td>
+                <td>Chưa có</td>
+                <td>Báo cáo tiến độ tuyển</td>
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                <td>Onboarding 2 bạn mới, training</td>
+                <td>Hoàn tất hợp đồng thử việc</td>
+                <td>Ngày đầu, học việc</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><strong>4-5</strong></td>
+                <td>Giao bài tập 1, review hàng ngày</td>
+                <td>-</td>
+                <td>Làm bài tập 1 (nền tảng)</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><strong>6</strong></td>
+                <td><span class="text-accent">Checkpoint giữa kỳ</span></td>
+                <td>-</td>
+                <td>Bắt đầu bài tập 2</td>
+                <td>Báo cáo Checkpoint 1 tháng</td>
+            </tr>
+            <tr>
+                <td><strong>7-8</strong></td>
+                <td>Giám sát bài tập 2, gỡ rối</td>
+                <td>-</td>
+                <td>Triển khai core MVP</td>
+                <td>Weekly Report</td>
+            </tr>
+            <tr>
+                <td><strong>9-10</strong></td>
+                <td>Review bài tập 3, chuẩn bị demo</td>
+                <td>-</td>
+                <td>Hoàn thiện MVP Beta</td>
+                <td>Weekly Report</td>
+            </tr>
+            <tr>
+                <td><strong>11</strong></td>
+                <td>Thu thập dữ liệu đánh giá</td>
+                <td>Chuẩn bị hợp đồng chính thức (nếu cần)</td>
+                <td>Ôn tập, chuẩn bị demo</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><strong>12</strong></td>
+                <td><span class="text-accent">Demo Day + Ra quyết định</span></td>
+                <td>Hành chính nhân sự</td>
+                <td>Trình bày MVP</td>
+                <td><strong>Báo cáo cuối kỳ + Quyết định</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- KẾT LUẬN -->
+    <div class="card" style="background: linear-gradient(135deg, #0a2540, #1a4a7a); color: white; border-left: none;">
+        <h2 style="color: var(--accent);">💡 KẾT LUẬN & BƯỚC TIẾP THEO</h2>
+        <p>Với mô hình <strong class="text-purple">DM + BA + Tech Lead</strong>, công ty có được:</p>
+        <ul>
+            <li>✅ <strong>Người điều phối chuyên trách</strong> (DM) - giảm tải cho CEO, đảm bảo tiến độ</li>
+            <li>✅ <strong>Cơ chế đánh giá khách quan</strong> qua 8 tuần thử việc có bài tập cụ thể</li>
+            <li>✅ <strong>Quyết định nhân sự dựa trên dữ liệu</strong>, không dựa trên cảm tính</li>
+            <li>✅ <strong>Tối ưu chi phí</strong>: chỉ nuôi 3 người trong 90 ngày thay vì team 7-10 người</li>
+			<li>✅ <strong>Tạo Quy trình chuẩn</strong>: áp dụng cho các kế hoạch tuyển dụng trong tương tai</li>
+        </ul>
+        <p>Sau ngày 90, CEO có đủ <strong class="text-accent">dữ liệu + MVP + đội ngũ đã được kiểm chứng</strong> để tự tin quyết định Scale-up cho Khách hàng/dự án nào.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
