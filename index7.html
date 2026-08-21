@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kế Hoạch Phát Triển Technical Team - TP.HCM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .overview {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+
+        .overview h2 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .phase {
+            margin-bottom: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .phase-header {
+            padding: 20px;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .phase-1 .phase-header { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .phase-2 .phase-header { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .phase-3 .phase-header { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+        .phase-content {
+            padding: 25px;
+            background: white;
+        }
+
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .month-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-top: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .month-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .month-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .activity-list, .recruitment-list {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .activity-list li, .recruitment-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .activity-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .recruitment-list li:before {
+            content: "👤";
+            position: absolute;
+            left: 0;
+        }
+
+        .deliverable {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #1976D2;
+        }
+
+        .jobs-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+
+        .jobs-section h2 {
+            color: #d84315;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .job-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .job-section {
+            margin-bottom: 15px;
+        }
+
+        .job-section h4 {
+            color: #e74c3c;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .risk-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+
+        .risk-section h2 {
+            color: #c62828;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .risk-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #f44336;
+        }
+
+        .risk-title {
+            font-weight: bold;
+            color: #c62828;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .solution {
+            background: #e8f5e9;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #4caf50;
+        }
+
+        .kpi-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+
+        .kpi-section h2 {
+            color: #00695c;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            transform: scale(1.05);
+        }
+
+        .kpi-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00897b;
+            margin-bottom: 10px;
+        }
+
+        .kpi-label {
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .toc {
+            background: #f5f5f5;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .toc h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            columns: 2;
+        }
+
+        .toc li {
+            padding: 8px 0;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .phase {
+                break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .month-grid {
+                grid-template-columns: 1fr;
+            }
+            .toc ul {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 KẾ HOẠCH PHÁT TRIỂN TECHNICAL TEAM tại HCM</h1>
+            <p>Thị trường TP.HCM | Thời gian: 6-12 tháng | BFSI Sector</p>
+        </div>
+
+        <div class="toc">
+            <h2> Mục Lục</h2>
+            <ul>
+                <li><a href="#overview">1. Tổng Quan Chiến Lược</a></li>
+                <li><a href="#phase1">2. Giai Đoạn 1: Khởi Tạo (Tháng 1-3)</a></li>
+                <li><a href="#phase2">3. Giai Đoạn 2: Xây Dựng (Tháng 4-6)</a></li>
+                <li><a href="#phase3">4. Giai Đoạn 3: Tăng Tốc (Tháng 7-12)</a></li>
+                <li><a href="#jobs">5. Mô Tả Công Việc & Yêu Cầu</a></li>
+                <li><a href="#risks">6. Rủi Ro & Giải Pháp</a></li>
+                <li><a href="#kpi">7. KPI Đánh Giá</a></li>
+            </ul>
+        </div>
+
+        <div id="overview" class="overview">
+            <h2>🎯 Tổng Quan Chiến Lược</h2>
+            <p><strong>Mục tiêu:</strong> Xây dựng đội ngũ kỹ thuật tại HCM có khả năng tự chủ triển khai các giải pháp BFSI (Core banking modules, Data Analytics, AI, DevSecOps), giảm áp lực vào việc điều phối nhân sự từ Hà Nội.</p>
+            <p><strong>Mô hình:</strong> Hybrid (Kết hợp nhân sự Core tại văn phòng công ty và nhân sự Onsite tại khách hàng nhưng được quản lý tập trung).</p>
+        </div>
+
+        <div id="phase1" class="phase phase-1">
+            <div class="phase-header">
+                🚀 GIAI ĐOẠN 1: KHỞI TẠO & CHUẨN HÓA (Tháng 1-3)
+            </div>
+            <div class="phase-content">
+                <p><strong>Mục tiêu:</strong> Hiểu rõ hiện trạng, thiết lập quy trình làm việc giữa HCM và Hà Nội, tuyển dụng nhân sự chủ chốt.</p>
+                
+                <div class="month-grid">
+                    <div class="month-card">
+                        <div class="month-title"> Tháng 1: Khảo sát & Thiết lập nền tảng</div>
+                        <ul class="activity-list">
+                            <li>Gặp gỡ toàn bộ nhân viên kỹ thuật đang onsite để đánh giá năng lực</li>
+                            <li>Làm việc với Pre-sales/Sales HCM để hiểu nhu cầu khách hàng</li>
+                            <li>Thiết lập kênh giao tiếp, báo cáo (Jira/Confluence) thống nhất</li>
+                        </ul>
+                        <ul class="recruitment-list">
+                            <li><strong><font color="brown">Tuyển dụng:</strong> 01 Technical Lead / Solution Architect</font></li>
+                        </ul>
+                        <div class="deliverable">✓ Báo cáo hiện trạng nhân sự, Quy trình phối hợp HN-HCM</div>
+                    </div>
+
+                    <div class="month-card">
+                        <div class="month-title">📅 Tháng 2: Chuẩn hóa DevSecOps & Tuyển dụng</div>
+                        <ul class="activity-list">
+                            <li>Thiết lập môi trường CI/CD, Sandbox cho team HCM</li>
+                            <li>Bắt đầu quy trình tuyển dụng các vị trí Senior</li>
+                            <li>Luân chuyển nhân sự onsite giỏi về văn phòng đào tạo</li>
+                        </ul>
+                        <ul class="recruitment-list">
+                            <li><font color="brown">01 Senior BA (Mảng Core Banking/Payment)</font></li>
+                            <li>01 Senior DevSecOps</li>
+                        </ul>
+                        <div class="deliverable">✓ Môi trường phát triển sẵn sàng, JD chi tiết</div>
+                    </div>
+
+                    <div class="month-card">
+                        <div class="month-title">📅 Tháng 3: Pilot Project nội bộ</div>
+                        <ul class="activity-list">
+                            <li><font color="brown">Thực hiện POC về AI hoặc Data Analytics cho khách hàng tiềm năng</font></li>
+                            <li>Đào tạo quy trình Agile/Scrum chuẩn cho team</li>
+                        </ul>
+                        <ul class="recruitment-list">
+                            <li>02 Senior Fullstack/Backend (Java/.NET)</li>
+                        </ul>
+                        <div class="deliverable">✓ 01 POC thành công, Team vận hành theo Agile/Hybrid</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="phase2" class="phase phase-2">
+            <div class="phase-header">
+                 GIAI ĐOẠN 2: XÂY DỰNG NĂNG LỰC TRIỂN KHAI (Tháng 4-6)
+            </div>
+            <div class="phase-content">
+                <p><strong>Mục tiêu:</strong> Team HCM có thể nhận yêu cầu từ Pre-sales và tự triển khai các module/giải pháp độc lập.</p>
+                
+                <div class="month-grid">
+                    <div class="month-card">
+                        <div class="month-title">📅 Tháng 4: Mở rộng đội ngũ Data & AI</div>
+                        <ul class="activity-list">
+                            <li>Tập trung vào mảng Data & AI (Customer Insight, Fraud Detection)</li>
+                            <li><font color="brown">Tổ chức Workshop chia sẻ kiến thức BFSI từ Hà Nội</font></li>
+                        </ul>
+                        <ul class="recruitment-list">
+                            <li>01 Data Engineer Senior</li>
+                            <li>01 AI/Machine Learning Engineer</li>
+                        </ul>
+                        <div class="deliverable">✓ Quy trình xử lý dữ liệu chuẩn cho BFSI</div>
+                    </div>
+
+                    <div class="month-card">
+                        <div class="month-title">📅 Tháng 5: Tối ưu hóa nguồn lực Onsite</div>
+                        <ul class="activity-list">
+                            <li>Đánh giá lại hợp đồng onsite, chuyển sang Dedicated Team</li>
+                            <li><strong>Thiết lập đội ngũ QA/Tester chuyên biệt cho BFSI</strong></li>
+                        </ul>
+                        <ul class="recruitment-list">
+                            <li><font color="brown">01 QA Lead (có kinh nghiệm test banking)</font></li>
+                            <li>02 Middle Developer</li>
+                        </ul>
+                        <div class="deliverable">✓ Cơ cấu lại nhân sự onsite, tăng bill rate</div>
+                    </div>
+
+                    <div class="month-card">
+                        <div class="month-title">📅 Tháng 6: Review 6 tháng & Điều chỉnh</div>
+                        <ul class="activity-list">
+                            <li>Đánh giá hiệu quả chi phí và doanh thu từ team HCM</li>
+                            <li>Xác định các <strong>"lỗ hổng" kỹ năng</strong> cần bổ sung</li>
+                        </ul>
+                        <div class="deliverable">✓ Báo cáo năng lực team, Kế hoạch giai đoạn 2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="phase3" class="phase phase-3">
+            <div class="phase-header">
+                 GIAI ĐOẠN 3: TĂNG TỐC & KHẲNG ĐỊNH VỊ THẾ (Tháng 7-12)
+            </div>
+            <div class="phase-content">
+                <p><strong>Mục tiêu:</strong> Team HCM trở thành một Delivery Hub, có thể support mở rộng thị trường tại các tỉnh miền Tây.</p>
+                
+                <div class="month-grid">
+                    <div class="month-card">
+                        <div class="month-title">📅 Tháng 7-9: Chuyên môn hóa sâu</div>
+                        <ul class="activity-list">
+                            <li>Thành lập các <strong> "Squad" </strong> nhỏ theo công nghệ</li>
+                            <li>Tham gia sâu vào giai đoạn Pre-sales (Technical Demo)</li>
+                        </ul>
+                        <ul class="recruitment-list">
+                            <li>Bổ sung Middle/Junior (Mô hình 1 Senior kèm 2 Junior)</li>
+							<li>Mở rộng hợp tác với các sub-contract để tối ưu resource</li>
+                        </ul>
+                        <div class="deliverable">✓ Các Squad chuyên môn hoạt động hiệu quả</div>
+                    </div>
+
+                    <div class="month-card">
+                        <div class="month-title">📅 Tháng 10-12: Ổn định & Văn hóa</div>
+                        <ul class="activity-list">
+                            <li>Xây dựng văn hóa kỹ thuật (Tech Talk, Hackathon)</li>
+                            <li>Chuẩn bị nguồn lực cho mùa cao điểm cuối năm</li>
+                        </ul>
+                        <div class="deliverable">✓ Đội ngũ HCM ổn định, turnover < 10%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="jobs" class="jobs-section">
+            <h2> MÔ TẢ CÔNG VIỆC & YÊU CẦU KỸ NĂNG</h2>
+            
+            <div class="job-card">
+                <div class="job-title">1. Technical Lead / Solution Architect ⭐ (Ưu tiên số 1)</div>
+                <div class="job-section">
+                    <h4>Vai trò:</h4>
+                    <p>Cánh tay phải của Technical PM, chịu trách nhiệm về kiến trúc hệ thống và chất lượng code của team HCM.</p>
+                </div>
+                <div class="job-section">
+                    <h4>Công việc chính:</h4>
+                    <ul class="activity-list">
+                        <li>Thiết kế kiến trúc hệ thống cho các giải pháp BFSI (Microservices, Hybrid Cloud)</li>
+                        <li>Review code, đảm bảo tuân thủ DevSecOps</li>
+                        <li>Làm việc trực tiếp với CTO/CIO của khách hàng</li>
+                        <li>Mentoring cho Senior Dev và Tech Lead tương lai</li>
+                    </ul>
+                </div>
+                <div class="job-section">
+                    <h4>Yêu cầu:</h4>
+                    <ul>
+                        <li>7+ năm kinh nghiệm, ít nhất 3 năm trong lĩnh vực Banking/Fintech</li>
+                        <li>Thành thạo Java Spring Boot / .NET Core</li>
+                        <li>Hiểu sâu về Cloud (AWS/Azure) và On-premise Security</li>
+                        <li>Có tư duy sản phẩm (Product Mindset)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-title">2. Senior Business Analyst (BFSI Domain)</div>
+                <div class="job-section">
+                    <h4>Vai trò:</h4>
+                    <p>Cầu nối nghiệp vụ, đảm bảo team hiểu đúng yêu cầu khắt khe của ngân hàng.</p>
+                </div>
+                <div class="job-section">
+                    <h4>Công việc chính:</h4>
+                    <ul class="activity-list">
+                        <li>Phân tích nghiệp vụ: Core Banking, Payment, Lending, Risk Management</li>
+                        <li>Viết tài liệu đặc tả (SRS/BRD) chi tiết</li>
+                        <li>Làm việc với khách hàng để clarify requirement</li>
+                    </ul>
+                </div>
+                <div class="job-section">
+                    <h4>Yêu cầu:</h4>
+                    <ul>
+                        <li>5+ năm kinh nghiệm BA, bắt buộc có dự án Bank/Finance</li>
+                        <li>Hiểu biết về quy trình SBV, chuẩn ISO 20022, BASL II/III</li>
+                        <li>Kỹ năng vẽ Flowchart, BPMN, UML thành thạo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-title">3. Senior DevSecOps Engineer</div>
+                <div class="job-section">
+                    <h4>Vai trò:</h4>
+                    <p>Đảm bảo "Vũ khí" DevSecOps của công ty được triển khai thực tế.</p>
+                </div>
+                <div class="job-section">
+                    <h4>Công việc chính:</h4>
+                    <ul class="activity-list">
+                        <li>Xây dựng và duy trì CI/CD Pipeline tự động hóa</li>
+                        <li>Tích hợp công cụ quét bảo mật (SAST, DAST) vào quy trình build</li>
+                        <li>Quản lý hạ tầng (Terraform/Ansible) và Monitoring</li>
+                    </ul>
+                </div>
+                <div class="job-section">
+                    <h4>Yêu cầu:</h4>
+                    <ul>
+                        <li>Chuyên sâu về Docker, Kubernetes, Jenkins/GitLab CI</li>
+                        <li>Kiến thức mạnh về Security Compliance (OWASP, PCI-DSS)</li>
+                        <li>Kinh nghiệm làm việc với môi trường Hybrid Cloud của Bank</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-title">4. Senior Data Engineer / AI Engineer</div>
+                <div class="job-section">
+                    <h4>Vai trò:</h4>
+                    <p>Triển khai các giải pháp phân tích dữ liệu và AI (mảng đang hot).</p>
+                </div>
+                <div class="job-section">
+                    <h4>Công việc chính:</h4>
+                    <ul class="activity-list">
+                        <li>Xây dựng Data Pipeline (ETL/ELT) từ các nguồn dữ liệu ngân hàng</li>
+                        <li>Triển khai các mô hình AI: Credit Scoring, Fraud Detection, Chatbot</li>
+                    </ul>
+                </div>
+                <div class="job-section">
+                    <h4>Yêu cầu:</h4>
+                    <ul>
+                        <li>Thành thạo Python, SQL, Spark/Hadoop</li>
+                        <li>Kinh nghiệm với các thư viện ML/DL (TensorFlow, PyTorch)</li>
+                        <li>Hiểu về dữ liệu tài chính và quy định ẩn danh hóa dữ liệu</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="risks" class="risk-section">
+            <h2>⚠️ RỦI RO & GIẢI PHÁP QUẢN TRỊ</h2>
+            
+            <div class="risk-card">
+                <div class="risk-title">1. Rủi ro "Sốc văn hóa" Hà Nội - HCM</div>
+                <p><strong>Vấn đề:</strong> Nhân viên HCM quen tự do, trong khi quy trình công ty có thể cứng nhắc từ Hà Nội.</p>
+                <div class="solution">
+                    <strong>💡 Giải pháp:</strong> PM (HauNP) là người "đệm". Áp dụng quy trình nhưng linh hoạt về thời gian và cách thức báo cáo. Tạo môi trường cởi mở, tôn trọng sự khác biệt vùng miền.
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <div class="risk-title">2. Rủi ro "Chảy máu chất xám" (Turnover)</div>
+                <p><strong>Vấn đề:</strong> Thị trường HCM cạnh tranh nhân sự rất gắt gao, đặc biệt là Senior.</p>
+                <div class="solution">
+                    <strong>💡 Giải pháp:</strong>
+                    <ul>
+                        <li>Chế độ lương thưởng cạnh tranh (cần đề xuất với BGĐ)</li>
+                        <li>Cho phép tiếp cận công nghệ mới (AI, Cloud) thay vì chỉ làm maintenance</li>
+                        <li>Lộ trình thăng tiến rõ ràng: Từ Onsite → Core Team → Tech Lead</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <div class="risk-title">3. Rủi ro đi theo lối mòn</div>
+                <p><strong>Vấn đề:</strong> Team HCM chỉ biết làm theo các giải pháp có sẳn, không có khả năng tư duy giải pháp mới.</p>
+                <div class="solution">
+                    <strong>💡 Giải pháp:</strong> Giao KPI về "Sáng kiến cải tiến" hoặc "Tối ưu hóa quy trình". Khuyến khích team HCM đề xuất giải pháp kỹ thuật cho các bài toán của khách hàng phía Nam.
+                </div>
+            </div>
+        </div>
+
+        <div id="kpi" class="kpi-section">
+            <h2>📊 KPI ĐÁNH GIÁ THÀNH CÔNG (Sau 1 năm)</h2>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-number">10-50</div>
+                    <div class="kpi-label"><strong>Nhân sự Core Team</strong><br>(1 Tech lead, <br>1 BA, <br>1 QC lead,<br> 3-5 senior)</div>
+					<div class="kpi-label"><strong>Sub-contract</strong><br></div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-number">30%</div>
+                    <div class="kpi-label">Doanh thu từ Giải pháp/Sản phẩm<br>(không chỉ bán người)</div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-number">↓</div>
+                    <div class="kpi-label">Tỷ lệ lỗi (bug rate) giảm<br>DevSecOps được công nhận</div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-number">&lt;15%</div>
+                    <div class="kpi-label">Tỷ lệ nhân sự nghỉ việc<br>trong năm đầu</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+            <p style="color: blue; font-style: italic; font-size:20px;"><strong>"Trên mặt đất vốn làm gì có đường. Người ta đi mãi thì thành đường thôi" - Lỗ Tấn </strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.phase, .job-card, .risk-card, .kpi-card').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
